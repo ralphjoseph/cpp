@@ -61,9 +61,10 @@ void mergeSort(int arr[], int l, int r)
     {
         // Same as (l+r)/2, but avoids overflow for
         // large l and h
-        int m = l+(r-l)/2;
+        //int m = l+(r-l)/2;
+        int m = (l+r)/2;
         //cout<<"l:"<<l<<" r:"<<r<<" m:"<<m<<endl;
-        //int m = (l-r)/2;
+
 
         // Sort first and second halves
         mergeSort(arr, l, m);
@@ -77,6 +78,11 @@ void mergeSort(int arr[], int l, int r)
 int main()
 {
     int input[] = {23,34,12,1,8,5};
+
+    for (auto i : input)
+        cout<<i<<" ";
+    cout<<endl;
+
     mergeSort(input,0, sizeof(input)/sizeof(int)-1);
 
     for (auto i : input)

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
 class Node{
@@ -38,34 +39,6 @@ public:
         cout<<"deleted:"<<p_node->data<<endl;
         delete p_node;
     }
-    /*void insert(int p_data)
-    {
-        if (root == nullptr)
-        {
-            root = new Node(p_data);
-        }
-        else
-        {
-            insert(root,p_data);
-        }
-    }
-
-    void insert(Node* p_workNode, int p_data)
-    {
-        if (p_data < p_workNode->data ) {
-                if (p_workNode->left != nullptr)
-                    insert(p_workNode->left, p_data);
-                else
-                    p_workNode->left = new Node(p_data);
-        }
-        else
-        {
-                if (p_workNode->right != nullptr)
-                    insert(p_workNode->right, p_data);
-                else
-                    p_workNode->right = new Node(p_data);
-        }
-    }*/
 
     void insert(int p_data)
     {
@@ -179,13 +152,33 @@ public:
                 current->data = leastLeaf->data;
                 leastLeaf->data = temp;
                 //now delete the current value
-                deleteNodeHelper(current,current->right, temp);
+                return deleteNodeHelper(current,current->right, temp);
             }
-            return;
+            cout<<"actual deleted-->:"<<current->data<<endl;
+            delete current;            //return;
         }
-        cout<<"actual deleted-->:"<<current->data<<endl;
-        delete current;
+
         return;
+    }
+
+    void printBFS()
+    {
+        cout<<"BFS print"<<endl;
+        queue<Node*> q;
+
+        q.push(root);
+
+        while(!q.empty())
+        {
+            Node* tmp = q.front();
+            q.pop();
+            cout<<tmp->data<<" ";
+            if (tmp->left)
+                q.push(tmp->left);
+            if (tmp->right)
+                q.push(tmp->right);
+        }
+        cout<<endl;
     }
 
 };
@@ -203,9 +196,12 @@ int main()
     bst.insert(150);
 
     bst.print();
+    bst.printBFS();
 
     bst.deleteNode(200);
     bst.print();
+
+    bst.printBFS();
 
     cout<<"height:"<<bst.height()<<endl;
     cout<<"size:"<<bst.size()<<endl;
