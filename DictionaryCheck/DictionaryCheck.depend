@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1472584306 source:c:\cpp\dictionarycheck\main.cpp
+	<iostream>
+	<set>
+	<string>
+
